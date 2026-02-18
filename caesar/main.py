@@ -54,7 +54,6 @@ def main() -> None:
     parseManager = argparse.ArgumentParser(prog="caesar", description="variable name maker")
 
     parseManager.add_argument("--version", action="version", version="%(prog)s 0.1.0", help = "Show the version number and exit")
-    parseManager.add_argument("--help", "-h", action="help", help = "Show this help message and exit")
     parseManager.add_argument("--snake", "-s", action="store_true", help = "Start a session which returns Snake case")
     parseManager.add_argument("--camel", "-c", action="store_true", help = "Start a session which returns Camel case")
     parseManager.add_argument("--pascal", "-p", action="store_true", help = "Start a session which returns Pascal case")
