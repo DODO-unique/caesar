@@ -1,41 +1,18 @@
 import pyperclip
 import argparse
 import time
+from typing import Callable
 
-def greet(is_quick: bool, mode: str) -> None:
+def run_session(formatter: Callable[[str], str], mode: str, is_quick: bool) -> None:
+
+    # greet the user
     if not is_quick:
         print("Hello, I am Caesar! A variable name maker.")
         print(f"You have chosen {mode} case mode.")
         print("Type your variable, seperated with spaces. I will format it and copy it to your clipboard. Hoping you have a clipboard manager :)")
         print("Press Ctrl+C to exit at any time.\n")
-    else:
-        return
-
-def farewell(quick: bool) -> None:
-    if not quick:
-        dialogue = ["Veni.", "Vidi.", "Vici."]
-        for word in dialogue:
-            print("\n")
-            print(word)
-            time.sleep(0.5)
-    else:
-        return
-
-def snake_case(is_quick: bool) -> None:
-    greet(is_quick, "Snake")
-    while True:
-        try:    
-            text = input("Enter the variable: ")
-            formatted_text = text.strip().replace(" ", "_")
-
-            pyperclip.copy(formatted_text)
-            print("Copied!")
-        except KeyboardInterrupt:
-            farewell(is_quick)
-            break
-
-def camel_case(is_quick: bool) -> None:
-    greet(is_quick, "Camel")
+    
+    # main loop
     while True:
         try:
             text = input("Enter the variable: ")
@@ -43,33 +20,33 @@ def camel_case(is_quick: bool) -> None:
             if len(text) == 0:
                 print("Empty input. Please try again.")
                 continue
-
-            if text[0].isupper():
-                text = text[0].lower() + text[1:]
-            
-            new = text.split()
-            formatted_text = new[0] + "".join(word.capitalize() for word in new[1:])
-
+            formatted_text = formatter(text)
             pyperclip.copy(formatted_text)
             print("Copied!")
         except KeyboardInterrupt:
-            farewell(is_quick)
             break
+    
+    # farewell dialogue
+    if not is_quick:
+        dialogue = ["Veni.", "Vidi.", "Vici."]
+        for word in dialogue:
+            print(word)
+            time.sleep(0.5)
 
-def pascal_case(is_quick: bool) -> None:
-    greet(is_quick, "Pascal")
-    while True:
-        try:
-            text = input("Enter the variable: ")
-                    
-            new = text.split()
-            formatted_text = "".join(word.capitalize() for word in new)
+def snake_case(text: str) -> str:
+    return text.strip().replace(" ", "_")
 
-            pyperclip.copy(formatted_text)
-            print("Copied!")
-        except KeyboardInterrupt:
-            farewell(is_quick)
-            break
+def camel_case(text: str) -> str:
+    if text[0].isupper():
+        text = text[0].lower() + text[1:]
+    
+    new = text.split()
+    return new[0] + "".join(word.capitalize() for word in new[1:])
+
+
+def pascal_case(text: str) -> str:
+    new = text.split()
+    return "".join(word.capitalize() for word in new)
 
 def main() -> None:
 
@@ -88,11 +65,11 @@ def main() -> None:
         parseManager.error("Choose exactly one mode: -s, -c, or -p")
 
     if args.snake:
-        snake_case(args.quick)
+        run_session(snake_case, "Snake", args.quick)
     if args.camel:
-        camel_case(args.quick)
+        run_session(camel_case, "Camel", args.quick)
     if args.pascal:
-        pascal_case(args.quick)
+        run_session(pascal_case, "Pascal", args.quick)
     
 
 if __name__ == "__main__":
