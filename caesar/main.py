@@ -16,7 +16,9 @@ def run_session(formatter: Callable[[str], str], mode: str, is_quick: bool) -> N
     while True:
         try:
             text = input("Enter the variable: ")
-
+            
+            # strip leading and trailing whitespace, and check if the input is empty
+            text = text.strip()
             if len(text) == 0:
                 print("Empty input. Please try again.")
                 continue
