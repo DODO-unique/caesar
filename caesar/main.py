@@ -34,7 +34,7 @@ def run_session(formatter: Callable[[str], str], mode: str, is_quick: bool) -> N
             time.sleep(0.5)
 
 def snake_case(text: str) -> str:
-    return text.strip().replace(" ", "_")
+    return "_".join(text.split())
 
 def camel_case(text: str) -> str:
     if text[0].isupper():
