@@ -1,8 +1,28 @@
 import pyperclip
 import argparse
+import time
 
+def greet(is_quick: bool, mode: str) -> None:
+    if not is_quick:
+        print("Hello, I am Caesar! A variable name maker.")
+        print(f"You have chosen {mode} case mode.")
+        print("Type your variable, seperated with spaces. I will format it and copy it to your clipboard. Hoping you have a clipboard manager :)")
+        print("Press Ctrl+C to exit at any time.\n")
+    else:
+        return
 
-def snake_case() -> None:
+def farewell(quick: bool) -> None:
+    if not quick:
+        dialogue = ["Veni.", "Vidi.", "Vici."]
+        for word in dialogue:
+            print("\n")
+            print(word)
+            time.sleep(0.5)
+    else:
+        return
+
+def snake_case(is_quick: bool) -> None:
+    greet(is_quick, "Snake")
     while True:
         try:    
             text = input("Enter the variable: ")
@@ -11,10 +31,11 @@ def snake_case() -> None:
             pyperclip.copy(formatted_text)
             print("Copied!")
         except KeyboardInterrupt:
-            print("\nExiting...")
+            farewell(is_quick)
             break
 
-def camel_case() -> None:
+def camel_case(is_quick: bool) -> None:
+    greet(is_quick, "Camel")
     while True:
         try:
             text = input("Enter the variable: ")
@@ -32,10 +53,11 @@ def camel_case() -> None:
             pyperclip.copy(formatted_text)
             print("Copied!")
         except KeyboardInterrupt:
-            print("\nExiting...")
+            farewell(is_quick)
             break
 
-def pascal_case() -> None:
+def pascal_case(is_quick: bool) -> None:
+    greet(is_quick, "Pascal")
     while True:
         try:
             text = input("Enter the variable: ")
@@ -46,7 +68,7 @@ def pascal_case() -> None:
             pyperclip.copy(formatted_text)
             print("Copied!")
         except KeyboardInterrupt:
-            print("\nExiting...")
+            farewell(is_quick)
             break
 
 def main() -> None:
@@ -57,6 +79,7 @@ def main() -> None:
     parseManager.add_argument("--snake", "-s", action="store_true", help = "Start a session which returns Snake case")
     parseManager.add_argument("--camel", "-c", action="store_true", help = "Start a session which returns Camel case")
     parseManager.add_argument("--pascal", "-p", action="store_true", help = "Start a session which returns Pascal case")
+    parseManager.add_argument("--quick", "-q", action="store_true", help = "Start without the greeting and farewell dialogue")
 
     args = parseManager.parse_args()
 
@@ -65,11 +88,11 @@ def main() -> None:
         parseManager.error("Choose exactly one mode: -s, -c, or -p")
 
     if args.snake:
-        snake_case()
+        snake_case(args.quick)
     if args.camel:
-        camel_case()
+        camel_case(args.quick)
     if args.pascal:
-        pascal_case()
+        pascal_case(args.quick)
     
 
 if __name__ == "__main__":
