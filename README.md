@@ -7,8 +7,8 @@
 
 ## How it works
 1. You select a formatting mode. This starts a session
-2. Type sentences seperated by space
-3. formatted text is copied to your clipboard
+2. Type sentences separated by space
+3. Formatted text is copied to your clipboard
 
 
 ## Installation
@@ -50,12 +50,11 @@ v0.1.1:
 ### v0.1.0:
 - Primitive.
 - Contained MVPs
-- fixed snake-case formatting and universal whitespace handling issues (#1 & #2)
+- Fixed snake-case formatting and universal whitespace handling issues (#1 & #2)
 - Featured minimal README.md
 
 ### v0.1.1:
 
-- clipboard manager verification not implemented yet
 - three modes: snake case, pascal case, camel case
 - Formalities include: greeting, farewell, can be avoided with -q flag
 - exit by Ctrl+C (KeyboardInterrupt)
