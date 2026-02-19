@@ -36,7 +36,7 @@ pip install july-caesar
 
 ## Flags
 
-v0.1.0:
+v0.1.1:
 - Three modes available: 
    1. Snake case : `-s`, `--snake`
    2. Camel case : `-c`, `--camel`
@@ -48,9 +48,16 @@ v0.1.0:
 ## Version Notes
 
 ### v0.1.0:
+- Primitive.
+- Contained MVPs
+- fixed snake-case formatting and universal whitespace handling issues (#1 & #2)
+- Featured minimal README.md
+
+### v0.1.1:
 
 - clipboard manager verification not implemented yet
 - three modes: snake case, pascal case, camel case
 - Formalities include: greeting, farewell, can be avoided with -q flag
 - exit by Ctrl+C (KeyboardInterrupt)
+- features README.md, working code.
    
