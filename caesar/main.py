@@ -31,6 +31,7 @@ def run_session(formatter: Callable[[str], str], mode: str, is_quick: bool) -> N
     # farewell dialogue
     if not is_quick:
         dialogue = ["Veni.", "Vidi.", "Vici."]
+        print("\n")
         for word in dialogue:
             print(word)
             time.sleep(0.5)
