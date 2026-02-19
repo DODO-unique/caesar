@@ -1,3 +1,10 @@
+"""
+caesar.main
+
+CLI entry point for the Caesar case-conversion utility.
+Handles argument parsing and interactive session dispatch.
+"""
+
 import pyperclip
 import argparse
 import time
